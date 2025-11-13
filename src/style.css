@@ -1,0 +1,310 @@
+/* Add these new styles to your existing CSS */
+
+/* Search Section */
+.search-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .search-container {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .search-container .fa-search {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--light-text);
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+  .sort-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .sort-select {
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+    font-size: 0.9rem;
+    min-width: 150px;
+  }
+  
+  .sort-order-btn {
+    padding: 0.75rem 1rem;
+    background: var(--light-bg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  
+  .sort-order-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+  
+  .sort-order-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Icon Container */
+  .icon-container {
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+  }
+  
+  /* Low Stock Warning */
+  .low-stock {
+    color: var(--danger-color);
+    font-weight: 600;
+  }
+  
+  /* Checkout Form */
+  .checkout-form {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+  }
+  
+  .checkout-form h3 {
+    margin-bottom: 1.5rem;
+    color: var(--dark-text);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-text);
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+  .form-input:valid {
+    border-color: var(--success-color);
+  }
+  
+  .form-input:invalid {
+    border-color: var(--danger-color);
+  }
+  
+  .form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--light-text);
+    font-size: 0.8rem;
+  }
+  
+  .btn-checkout {
+    background: var(--success-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1.1rem;
+    width: 100%;
+    transition: var(--transition);
+  }
+  
+  .btn-checkout:hover:not(:disabled) {
+    background: #0da271;
+    transform: translateY(-2px);
+  }
+  
+  .btn-checkout:disabled {
+    background: var(--secondary-color);
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Confirmation Modal */
+  .confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .confirmation-modal {
+    background: white;
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--card-shadow-hover);
+    animation: slideIn 0.3s ease;
+  }
+  
+  .success-icon {
+    font-size: 4rem;
+    color: var(--success-color);
+    margin-bottom: 1rem;
+  }
+  
+  .confirmation-modal h3 {
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  .confirmation-modal p {
+    margin-bottom: 0.5rem;
+    color: var(--light-text);
+  }
+  
+  .btn-confirm {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: var(--transition);
+  }
+  
+  .btn-confirm:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+  
+  /* Enhanced Cart Styles */
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+  }
+  
+  .cart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+  
+  .cart-item-info {
+    flex: 1;
+  }
+  
+  .cart-item-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--dark-text);
+  }
+  
+  .cart-item-info .location {
+    margin: 0 0 0.5rem 0;
+    color: var(--light-text);
+  }
+  
+  .cart-item-info .price {
+    margin: 0;
+    font-weight: 600;
+    color: var(--dark-text);
+  }
+  
+  .cart-item-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+  
+  /* Responsive Design for new elements */
+  @media (max-width: 768px) {
+    .search-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .search-container {
+      min-width: auto;
+    }
+    
+    .cart-item {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+    
+    .cart-item-controls {
+      align-items: center;
+      margin-top: 1rem;
+    }
+    
+    .confirmation-modal {
+      padding: 2rem;
+      margin: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sort-controls {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .sort-select, .sort-order-btn {
+      width: 100%;
+    }
+  }

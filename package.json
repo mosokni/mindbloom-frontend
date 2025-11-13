@@ -1,0 +1,17 @@
+{
+    "name": "after-school-classes-app",
+    "version": "1.0.0",
+    "scripts": {
+      "serve": "vue-cli-service serve",
+      "build": "vue-cli-service build",
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d dist"
+    },
+    "dependencies": {
+      "vue": "^3.3.0"
+    },
+    "devDependencies": {
+      "@vue/cli-service": "^5.0.0",
+      "gh-pages": "^5.0.0"
+    }
+  }

@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LessonsView from '../views/LessonsView.vue'
 import CartView from '../views/CartView.vue'
+import ConfirmationView from '../views/ConfirmationView.vue'
+
 
 const routes = [
-  { path: '/', redirect: '/lessons' },   
+    { path: '/', redirect: '/lessons' },
   { path: '/lessons', component: LessonsView },
-  { path: '/cart', component: CartView }
+  { path: '/cart', component: CartView },
+  { path: '/confirmation', component: ConfirmationView }
 ]
 
 const router = createRouter({

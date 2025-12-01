@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Cart</h2>
+    <h2>Your Cart</h2>
 
     <div v-if="cart.length === 0">
       Your cart is empty.
@@ -8,52 +8,45 @@
 
     <div v-else>
       <ul>
-        <li v-for="lesson in cart" :key="lesson._id">
+        <li v-for="(lesson, index) in cart" :key="lesson._id">
           {{ lesson.subject }} - £{{ lesson.price }}
+          <button @click="remove(index)" style="margin-left:10px;">
+            Remove
+          </button>
         </li>
       </ul>
 
-      <h3>Checkout</h3>
+      <p style="font-weight: bold; margin-top: 10px;">
+        Total: £{{ totalPrice }}
+      </p>
 
-      <form @submit.prevent="checkout">
-        <input v-model="name" placeholder="Your Name" required />
-        <input v-model="phone" placeholder="Phone Number" required />
-
-        <button type="submit">Submit Order</button>
-      </form>
-
-      <p v-if="successMessage">{{ successMessage }}</p>
+      <CheckoutForm
+        :cart="cart"
+        @order-complete="finishOrder"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { submitOrder } from '../services/orders'
+import CheckoutForm from '../components/CheckoutForm.vue'
 
 export default {
+  name: 'CartView',
   props: ['cart'],
-  data() {
-    return {
-      name: '',
-      phone: '',
-      successMessage: ''
+  components: { CheckoutForm },
+  methods: {
+    remove(index) {
+      this.$emit('remove-from-cart', index);
+    },
+    finishOrder() {
+      this.$emit('clear-cart');
+      this.$router.push('/lessons');
     }
   },
-  methods: {
-    async checkout() {
-      const order = {
-        name: this.name,
-        phone: this.phone,
-        lessons: this.cart,
-        createdAt: new Date()
-      };
-
-      try {
-        await submitOrder(order);
-        this.successMessage = 'Order successfully submitted!';
-      } catch (error) {
-        alert('Checkout failed');
-      }
+  computed: {
+    totalPrice() {
+      return this.cart.reduce((sum, lesson) => sum + lesson.price, 0);
     }
   }
 }

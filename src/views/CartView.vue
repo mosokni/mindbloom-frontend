@@ -1,52 +1,98 @@
 <template>
-  <div>
+  <div class="page-container">
+
     <h2>Your Cart</h2>
 
-    <div v-if="cart.length === 0">
+    <!-- Empty Cart Message -->
+    <div v-if="cart.length === 0" class="message warning">
       Your cart is empty.
     </div>
 
-    <div v-else>
-      <ul>
-        <li v-for="(lesson, index) in cart" :key="lesson._id">
-          {{ lesson.subject }} - £{{ lesson.price }}
-          <button @click="remove(index)" style="margin-left:10px;">
-            Remove
-          </button>
-        </li>
-      </ul>
+    <!-- Cart Items -->
+    <ul v-if="cart.length > 0" class="cart-list">
+      <li v-for="(item, index) in cart" :key="index">
 
-      <p style="font-weight: bold; margin-top: 10px;">
-        Total: £{{ totalPrice }}
-      </p>
+        <div>
+          <strong>{{ item.subject }}</strong><br />
+          £{{ item.price }}
+        </div>
 
-      <CheckoutForm
-        :cart="cart"
-        @order-complete="finishOrder"
-      />
+        <button class="remove-btn" @click="removeItem(index)">
+          Remove
+        </button>
+
+      </li>
+    </ul>
+
+    <!-- Total -->
+    <p v-if="cart.length > 0" class="total-paid">
+      Total: £{{ totalPrice }}
+    </p>
+
+    <!-- CHECKOUT SECTION -->
+    <div v-if="cart.length > 0" class="checkout-box">
+      <h3>Checkout</h3>
+
+      <form @submit.prevent="submitOrder">
+
+        <div class="input-group">
+          <label>Name</label>
+          <input v-model="name" type="text" required placeholder="Your Name" />
+        </div>
+
+        <div class="input-group">
+          <label>Phone</label>
+          <input v-model="phone" type="text" required placeholder="Phone Number" />
+        </div>
+
+        <button class="btn" type="submit" style="margin-top: 10px;">
+          Place Order
+        </button>
+
+      </form>
+
     </div>
+
   </div>
 </template>
 
 <script>
-import CheckoutForm from '../components/CheckoutForm.vue'
+import { submitOrder } from '../services/api'
 
 export default {
   name: 'CartView',
-  props: ['cart'],
-  components: { CheckoutForm },
-  methods: {
-    remove(index) {
-      this.$emit('remove-from-cart', index);
-    },
-    finishOrder() {
-      this.$emit('clear-cart');
-      this.$router.push('/lessons');
+  data() {
+    return {
+      name: '',
+      phone: ''
     }
   },
   computed: {
+    cart() {
+      return this.$root.cart
+    },
     totalPrice() {
-      return this.cart.reduce((sum, lesson) => sum + lesson.price, 0);
+      return this.cart.reduce((t, item) => t + item.price, 0)
+    }
+  },
+  methods: {
+    removeItem(index) {
+      this.$root.cart.splice(index, 1)
+    },
+
+    async submitOrder() {
+      const order = {
+        name: this.name,
+        phone: this.phone,
+        lessons: this.cart
+      }
+
+      const result = await submitOrder(order)
+
+      sessionStorage.setItem('last-order', JSON.stringify(order))
+      this.$root.cart = []
+
+      this.$router.push('/confirmation')
     }
   }
 }

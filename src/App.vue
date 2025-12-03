@@ -24,7 +24,7 @@ export default {
   },
 
   created() {
-    // ✅ Load cart from localStorage when app starts
+    // Load cart from localStorage when app starts
     const savedCart = localStorage.getItem('mindbloom-cart');
     if (savedCart) {
       this.cart = JSON.parse(savedCart);
@@ -32,7 +32,7 @@ export default {
   },
 
   watch: {
-    // ✅ Auto-save cart whenever it changes
+    // Auto-save cart whenever it changes
     cart: {
       handler(newCart) {
         localStorage.setItem('mindbloom-cart', JSON.stringify(newCart));
@@ -64,7 +64,7 @@ export default {
 
     clearCart() {
       this.cart = [];
-      localStorage.removeItem('mindbloom-cart'); // ✅ clear storage after checkout
+      localStorage.removeItem('mindbloom-cart'); // clear storage after checkout
     }
   }
 }

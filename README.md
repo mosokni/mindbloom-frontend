@@ -2,89 +2,120 @@
 CST3144 – Full Stack Development Coursework  
 Middlesex University – 2024/25
 
-MindBloom is a Vue.js single-page application designed to allow users to browse and book after-school classes. This frontend works together with a Node.js/Express backend and a MongoDB Atlas database.
+MindBloom is a Vue.js single-page web application designed to allow students and parents
+to browse and purchase after-school classes. The application retrieves lesson data from
+a deployed Express/Node.js backend and MongoDB Atlas database via REST API calls.
 
-This README provides full documentation for installation, usage, component structure, and API integration.
+This project satisfies the Coursework 1 requirements for CST3144.
 
 ---
 
-## 1. Features
+## 1. Deployed Application & Repositories
+
+| Service | Link |
+|--------|------|
+| Live Frontend (GitHub Pages) | https://mosokni.github.io/mindbloom-frontend/ |
+| Frontend GitHub Repository | https://github.com/mosokni/mindbloom-frontend |
+| Backend GitHub Repository | https://github.com/mosokni/mindbloom-backend |
+| Backend API Deployment (Render) | https://mindbloom-backend-szwj.onrender.com/lessons |
+
+---
+
+## 2. Frontend Features
 
 ### User-Facing Features
-- View a list of available lessons
-- Search and sort lessons (subject, price, location, availability)
-- Add lessons to the cart
-- Remove lessons from the cart
-- Checkout form with order submission
-- Confirmation page after booking
+- Displays at least 10 lessons with full details
+- Sorting by subject, location, price, or spaces (ascending/descending)
+- Search functionality by attribute text
+- Add items to cart (with space validation)
+- Remove lessons from cart (spaces restored)
+- Checkout form:
+  - Name (letters only)
+  - Phone number (digits only)
+  - Form validation before enabling the submit button
+- Order confirmation message once submitted
 
 ### Technical Features
-- Vue 3 with Composition API
-- Vue Router for page navigation
-- Reusable components (`LessonCard`, `LessonList`, `ShoppingCart`, `CheckoutForm`)
-- API service layer (`api.js`, `orders.js`)
-- JSON-based communication with Express backend
-- Real-time lesson availability through backend requests
+- Vue.js 3 framework
+- Fetch API with **promise-based** data access (no Axios/XMLHttpRequest)
+- Modular component structure
+- Connected to Render backend using real HTTP requests
+- Dynamic UI updates after backend responses
 
 ---
 
-## 2. Technology Stack
+## 3. Technologies Used
 
-**Frontend**
-- Vue.js 3  
-- Vite (development server & bundler)  
-- JavaScript ES6  
-- HTML5 & CSS3  
-
-**Backend (separate project)**
-- Node.js  
-- Express.js  
-- MongoDB Atlas  
-- REST API architecture  
+- Vue.js 3 (Composition API)
+- JavaScript ES6
+- HTML5 / CSS3
+- GitHub Pages deployment
+- REST communication with Express.js backend
 
 ---
 
-## 3. Project Structure
+## 4. Project Structure
 
 mindbloom-frontend/
-│
 ├── public/
-│ └── vite.svg
-│
+│ └── lessons/images
 ├── src/
 │ ├── assets/
 │ ├── components/
-│ │ ├── LessonCard.vue
 │ │ ├── LessonList.vue
 │ │ ├── ShoppingCart.vue
 │ │ ├── CheckoutForm.vue
-│ ├── services/
-│ │ ├── api.js
-│ │ ├── orders.js
 │ ├── views/
-│ │ ├── LessonsView.vue
-│ │ ├── CartView.vue
-│ │ ├── ConfirmationView.vue
 │ ├── router/
 │ │ └── index.js
 │ ├── App.vue
 │ └── main.js
-│
 ├── package.json
 ├── vite.config.js
 └── README.md
 
 ---
 
-## 4. Installation & Setup
+## 5. How to Run the Frontend Locally
 
 ### Prerequisites
-- Node.js (v18 or higher recommended)
+- Node.js 18 or later
 - NPM
-- Backend running at:  
-  **http://localhost:3000**
 
-### Install dependencies
-
+### Steps
 ```bash
+# Install dependencies
 npm install
+
+# Start development server
+npm run dev
+Vite will run on:
+
+http://localhost:5173/
+
+5. API Usage (Backend Integration)
+
+The frontend uses the Fetch API for all requests:
+
+GET → retrieve all lessons
+
+POST → submit order to backend
+
+PUT → update lesson spaces after checkout
+
+Example fetch call:
+
+fetch('https://mindbloom-backend-szwj.onrender.com/lessons')
+  .then(response => response.json())
+  .then(data => {
+    this.lessons = data;
+  });
+
+
+This ensures full compliance with the coursework specification.
+
+
+Author
+
+Mohamed Sokni
+BSc Computer Science – Middlesex University

@@ -75,10 +75,10 @@
   try {
     await submitOrder(order);
 
-    // ✅ Save order for confirmation page
+    // Save order for confirmation page
     sessionStorage.setItem('last-order', JSON.stringify(order));
 
-    // ✅ Redirect to confirmation page
+    // Redirect to confirmation page
     this.$emit('order-complete');
     this.$router.push('/confirmation');
   } catch (error) {
